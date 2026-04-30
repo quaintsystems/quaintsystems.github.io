@@ -1,2 +1,2 @@
 # quaintsystems.github.io
-quaint systems consulting
+let's make the internet fun again
