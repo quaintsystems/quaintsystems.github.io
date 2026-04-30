@@ -17,34 +17,91 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
 
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url('/images/chicken.JPG');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+    }
+
+    .leaf {
+      width: 440px;
+      filter: url(#ripple);
+      animation: drift 7s ease-in-out infinite, shimmer 5s ease-in-out infinite;
+      will-change: transform, filter;
+    }
+
+    @keyframes drift {
+      0%   { transform: translate(0px, 0px)    rotate(0deg); }
+      20%  { transform: translate(8px, -12px)  rotate(2deg); }
+      40%  { transform: translate(-6px, -18px) rotate(-1.5deg); }
+      60%  { transform: translate(-10px, -8px) rotate(-3deg); }
+      80%  { transform: translate(5px, -14px)  rotate(1deg); }
+      100% { transform: translate(0px, 0px)    rotate(0deg); }
+    }
+
+    @keyframes shimmer {
+      0%   { filter: url(#ripple) brightness(1)    contrast(1); }
+      25%  { filter: url(#ripple) brightness(1.15) contrast(1.05); }
+      50%  { filter: url(#ripple) brightness(0.92) contrast(0.98); }
+      75%  { filter: url(#ripple) brightness(1.1)  contrast(1.08); }
+      100% { filter: url(#ripple) brightness(1)    contrast(1); }
+    }
+    #questions-link:hover {
+      cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%3E%3Ctext%20y%3D%2228%22%20font-size%3D%2228%22%3E%E2%9C%8D%EF%B8%8F%3C%2Ftext%3E%3C%2Fsvg%3E") 0 28, auto;
+    }
+  </style>
+
 </head>
 <body>
 
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container">
-    <div class="row">
-      <div class="one-half column" style="margin-top: 25% margin-left: 15%">
-        <p style="font-family:courier;">
-          Something quaint is in the works for early 2021! Come back soon.
-        </p>
-        <p>
-          <img src="/images/QS_logo_gradient.png" style="max-height: 50%; max-width: 50%;"/>
-        </p>
-      </div>
-    </div>
-  </div>
+  <!-- SVG ripple filter: turbulence drives a displacement map for water-light distortion -->
+  <svg style="position:absolute;width:0;height:0" aria-hidden="true">
+    <defs>
+      <filter id="ripple" x="-25%" y="-25%" width="150%" height="150%">
+        <feTurbulence type="turbulence" baseFrequency="0.013 0.010" numOctaves="4" seed="3" result="wave">
+          <animate attributeName="baseFrequency"
+            values="0.013 0.010; 0.017 0.014; 0.010 0.017; 0.015 0.011; 0.013 0.010"
+            dur="9s" repeatCount="indefinite" />
+          <animate attributeName="seed"
+            values="3; 7; 12; 5; 3"
+            dur="13s" repeatCount="indefinite" />
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="wave" scale="10"
+          xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
+
+  <img class="leaf" src="/images/QS_logo_gradient.png" alt="Quaint Systems logo" />
+
+  <a id="questions-link" href="mailto:q@quaint.systems" style="
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    color: black;
+    background: white;
+    text-decoration: none;
+    padding: 6px 14px;
+    transition: background 0.2s;
+  " onmouseover="this.style.background='#c9a0dc'" onmouseout="this.style.background='white'">QUESTIONS?</a>
 
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
 </body>
 </html>
